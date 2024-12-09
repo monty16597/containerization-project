@@ -11,5 +11,4 @@ wp:
     BACKEND_URL: "http://34.172.145.211"
   containerPorts:
       http: 8080
-  secrets:
-      DATABASE_PASSWORD: {}
+  secrets: {}
