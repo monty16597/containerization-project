@@ -1,0 +1,16 @@
+db:
+  name: postgres-db
+  labels:
+    app: db
+    env: dev
+  image:
+    repository: postgres
+    tag: latest
+  replicas: 1
+  configmap:
+    POSTGRES_USER: postgres
+    POSTGRES_DB: postgres
+  containerPorts:
+      mysql: 5432
+  secrets:
+      POSTGRES_PASSWORD: postgres

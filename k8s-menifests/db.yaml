@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: db
+spec: {}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pg-config
+  namespace: db
+data:
+  POSTGRES_USER: "postgres"
+  POSTGRES_DB: "postgres"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pg-secret
+  namespace: db
+type: Opaque
+data:
+  POSTGRES_PASSWORD: cG9zdGdyZXM=
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-db
+  namespace: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: db
+          image: "postgres:latest"
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: pg-config
+            - secretRef:
+                name: pg-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-db
+  namespace: db
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP

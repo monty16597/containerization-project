@@ -1,0 +1,15 @@
+wp:
+  name: backend
+  labels:
+    app: backend
+    env: dev
+  image:
+    repository: manjeetsinhalonja/todo-backend
+    tag: v1
+  replicas: 1
+  configmap:
+    BACKEND_URL: "http://35.193.216.92"
+  containerPorts:
+      http: 8080
+  secrets:
+      DATABASE_PASSWORD: {}

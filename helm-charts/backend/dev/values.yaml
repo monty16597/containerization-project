@@ -1,0 +1,17 @@
+wp:
+  name: frontend
+  labels:
+    app: frontend
+    env: dev
+  image:
+    repository: manjeetsinhalonja/todo-frontend
+    tag: v1
+  replicas: 1
+  configmap:
+    DATABASE_USER: postgres
+    DATABASE_DB_NAME: postgres
+    DATABASE_HOST: postgres-db.db.svc.cluster.local
+  containerPorts:
+      http: 5000
+  secrets:
+      DATABASE_PASSWORD: postgres
