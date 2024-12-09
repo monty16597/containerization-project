@@ -8,7 +8,7 @@ wp:
     tag: v1
   replicas: 1
   configmap:
-    BACKEND_URL: "http://35.193.216.92"
+    BACKEND_URL: "http://34.172.145.211"
   containerPorts:
       http: 8080
   secrets:
