@@ -1,10 +1,10 @@
 wp:
-  name: frontend
+  name: backend
   labels:
-    app: frontend
+    app: backend
     env: dev
   image:
-    repository: manjeetsinhalonja/todo-frontend
+    repository: manjeetsinhalonja/todo-backend
     tag: v1
   replicas: 1
   configmap:
